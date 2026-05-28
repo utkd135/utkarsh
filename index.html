@@ -2,306 +2,600 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- <title>Your Portfolio</title> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utkarsh Doshi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:       #faf8f3;
+    --text:     #1a1918;
+    --muted:    #7d7870;
+    --accent:   #b5451b;
+    --border:   #e2ddd5;
+    --warm:     #f2ede4;
+  }
+
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: monospace, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #fffae2;
-    color: #553434;
-  }
-/*   header {
-    color: rgb(255, 253, 208);
-    text-align: center;
-    padding: 1.8rem 0;
-  } */
-  .container {
-    max-width: 800px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    max-width: 680px;
     margin: 0 auto;
-    padding: rem;
-  }
-  .section {
-    margin-bottom: 32px;
-  }
-  .image-container {
-      float: left; /* Move the image to the left */
-      margin-right: 20px; /* Add more spacing to the right */
-      margin-top: 40px;
-      margin-left: 45px;
-  }
-  .header-image {
-    width: 275px; /* Increase the image width */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 50%; /* Make the image circular */
-  }
-  .social-media-links {
-    clear: left; /* Clear the floating elements */
-  }
-  .social-media-links a {
-    display: inline-block; /* Display links as inline-block elements to arrange them horizontally */
-    margin-top: 50px;
-    margin-right: 15px; /* Add spacing between social media links */
-  }
-  .social-media-links i {
-    color: black; /* Change the color to black */
-    font-size: 32px; /* Increase the icon size to 24 pixels */
-    margin-left: 12px;
-  }
-  .block a {
-    color: black; /* Change the link color to black */
+    padding: 3.5rem 1.5rem 7rem;
   }
 
-  .block_hidden {
-    display: none; /* Initially hide the content */
+  /* ── Nav ── */
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    margin-bottom: 3.5rem;
+    font-size: 12.5px;
+    letter-spacing: 0.02em;
+  }
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--text); }
+
+  /* ── Header ── */
+  h1 {
+    font-family: 'Lora', serif;
+    font-size: 2.3rem;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 0.45rem;
+  }
+  .subtitle {
+    color: var(--muted);
+    font-size: 13.5px;
+    margin-bottom: 1.4rem;
+  }
+  .contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem 1rem;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+  .contact-links a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .contact-links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
   }
 
-  .sub_section-title {
-    font-size: 16px;
-    user-select: none;
+  /* ── Section rhythm ── */
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.8rem 0 0;
   }
-  header {
-    background-color: #fffae2;
-    color: #553434;
-    padding: 2rem;
+  section { scroll-margin-top: 1.5rem; }
+
+  h2 {
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: 0.01em;
+  }
+
+  p { margin-bottom: 0.85rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ── Updates feed ── */
+  .feed {
+    list-style: none;
+  }
+  .feed li {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 1.2rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    align-items: baseline;
+  }
+  .feed li:last-child { border-bottom: none; }
+  .feed-date {
+    color: var(--muted);
+    font-size: 11.5px;
+    padding-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Research cards ── */
+  .research-list { list-style: none; }
+  .research-item {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .research-item:last-child { border-bottom: none; }
+  .r-title {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+  .r-desc {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.65;
+    margin-bottom: 0.6rem;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tag {
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 2px 9px;
+    border-radius: 20px;
+  }
+  .tag.highlight {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Map embed ── */
+  .map-container {
+    margin: 1rem 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .country-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin-top: 1rem;
+  }
+  .chip {
+    font-size: 13px;
+    padding: 4px 12px;
+    background: var(--warm);
+    border-radius: 20px;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  /* ── Restaurants ── */
+  .legend {
     display: flex;
     align-items: center;
-    text-align: center;
-    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-bottom: 1rem;
   }
-  
-  .header-content {
-    flex: 1;
-  }
-  
-  .header-title {
-    font-size: 20px;
-    margin: 0;
-  }
-  
-  .header-subtitle {
-    font-size: 16px;
-    margin: 0;
-  }
-  
-  .header-image {
-    max-width: 324px;
+  .dot {
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(69, 229, 141, 0.1);
-    order: -1; 
-    transform: scale(1.2); /* Adjust the scale to zoom in */
-    object-fit: cover; /* Crop the image to cover the container */
-    transition: transform 0.2s ease-in-out;
+    background: var(--accent);
+    flex-shrink: 0;
+    display: inline-block;
   }
-  
-/* Add a new rule to change the font size for section titles */
-.section-title {
-  font-size: 20px; /* Adjust the font size as needed */
-}
 
-/* Add a new rule to change the font size for block titles */
-.block-title {
-  font-size: 16px; /* Adjust the font size as needed */
-}
+  .resto-list { list-style: none; }
+  .resto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    gap: 1rem;
+  }
+  .resto-item:last-child { border-bottom: none; }
+  .resto-name {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .resto-item.fav .resto-name { font-weight: 500; }
+  .resto-meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
 
-/* Add a new rule to change the font size for paragraphs */
-p {
-  font-size: 16px; /* Adjust the font size as needed */
-}
+  /* ── Movies grid ── */
+  .movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .movie-card {
+    background: var(--warm);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.8rem;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .movie-meta { color: var(--muted); font-size: 11px; margin-top: 2px; }
 
+  /* ── Hobbies ── */
+  .hobby-list { list-style: none; }
+  .hobby-list li {
+    display: flex;
+    gap: 0.9rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+    align-items: flex-start;
+  }
+  .hobby-list li:last-child { border-bottom: none; }
+  .arrow { color: var(--muted); flex-shrink: 0; padding-top: 1px; }
 
+  /* ── Footer ── */
+  footer {
+    margin-top: 5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* ── Photo ── */
+  .photo-wrap {
+    margin: 1.8rem 0 0;
+  }
+  .photo-wrap img {
+    width: 136px;
+    height: 136px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    display: block;
+    transition: opacity 0.35s ease;
+  }
+  .photo-caption {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  /* ── Fade-in on load ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  body > * {
+    animation: fadeUp 0.5s ease both;
+  }
+  nav    { animation-delay: 0.05s; }
+  header { animation-delay: 0.12s; }
+  hr:first-of-type { animation-delay: 0.18s; }
+
+  @media (max-width: 520px) {
+    body { padding: 2rem 1.2rem 5rem; }
+    h1   { font-size: 1.9rem; }
+    .feed li { grid-template-columns: 58px 1fr; }
+  }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="header-content">
-          <h1 class="header-title">Hi, I'm Utkarsh Doshi</h1>
-<!--           <p class="header-subtitle">Learning, Unlearning And Relearning</p> -->
-        </div>
-    </header>
 
-    <div class="image-container">
-      <img class="header-image" src="https://drive.google.com/uc?id=1RZMepiMP2fvA6AtIT-UdTp4VvZCkDWzv" alt="Your Profile Image">
-      <div class="social-media-links">
-        <a href="https://twitter.com/utkarsh1352002" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-twitter"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/utkarsh-doshi-5920201b9/" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/utkd135" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="https://medium.com/@utkarsh135" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-medium"></i>
-        </a>
+<nav>
+  <a href="#about">about</a>
+  <a href="#updates">updates</a>
+  <a href="#research">research</a>
+  <a href="#places">places</a>
+  <a href="#food">food</a>
+  <a href="#watching">watching</a>
+  <a href="#hobbies">hobbies</a>
+</nav>
+
+<header>
+  <h1>Utkarsh Doshi</h1>
+  <p class="subtitle">PhD researcher · University of Pittsburgh · Medical image analysis</p>
+  <div class="photo-wrap">
+    <img id="hero-photo" src="" alt="Utkarsh Doshi">
+    <p class="photo-caption" id="photo-caption"></p>
+  </div>
+
+  <div class="contact-links">
+    <a href="https://github.com/utkd135" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/utkarsh-doshi-5920201b9/" target="_blank">LinkedIn</a>
+    <a href="https://twitter.com/utkarsh1352002" target="_blank">Twitter</a>
+    <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>
+    <a href="mailto:utkarsh13520002@gmail.com">Email</a>
+  </div>
+</header>
+
+<hr>
+
+<!-- ─── ABOUT ─────────────────────────────────────── -->
+<section id="about">
+  <h2>about</h2>
+  <p>
+    I'm a PhD student at the University of Pittsburgh working on medical image analysis —
+    specifically OCT retinal imaging for age-related macular degeneration (AMD).
+    My research spans self-supervised learning, biomarker classification, segmentation pipelines,
+    and multi-modal image registration.
+  </p>
+  <p>
+    Before Pitt, I did my undergraduate in Electrical Engineering at
+    <a href="https://iith.ac.in" target="_blank">IIT Hyderabad</a>,
+    where I first got pulled into computer vision and learned that nothing beats a well-designed
+    loss function.
+  </p>
+</section>
+
+<hr>
+
+<!-- ─── UPDATES ───────────────────────────────────── -->
+<section id="updates">
+  <h2>updates</h2>
+  <ul class="feed">
+    <li>
+      <span class="feed-date">May 2026</span>
+      <span>Submitting paper on domain-adapted augmentation for LeJEPA SSL on Spectralis OCT B-scans — targeting <em>IEEE TMI</em>.</span>
+    </li>
+    <li>
+      <span class="feed-date">Sep 2024</span>
+      <span>Started PhD at University of Pittsburgh. Excited about what AMD biomarkers can tell us about disease progression.</span>
+    </li>
+    <li>
+      <span class="feed-date">Nov 2023</span>
+      <span>Ranked top 2% at the NeurIPS 2023 Machine Unlearning competition.</span>
+    </li>
+    <li>
+      <span class="feed-date">Oct 2023</span>
+      <span>Presented at <a href="https://2023.ieeeicip.org/" target="_blank">IEEE ICIP 2023</a> — came 3rd in the VIP CUP.</span>
+    </li>
+    <li>
+      <span class="feed-date">May 2023</span>
+      <span>Interned at Philips as a DL engineer — worked on 3D lung nodule texture classification.</span>
+    </li>
+  </ul>
+</section>
+
+<hr>
+
+<!-- ─── RESEARCH ──────────────────────────────────── -->
+<section id="research">
+  <h2>research</h2>
+  <ul class="research-list">
+
+    <li class="research-item">
+      <div class="r-title">LeJEPA: domain-adapted SSL for retinal OCT</div>
+      <p class="r-desc">
+        Designing augmentation strategies for a joint-embedding predictive architecture applied to
+        Spectralis OCT B-scans. Targeting AMD biomarker classification (drusen, PED, hypertransmission)
+        with 5-fold patient-level cross-validation. Best config reaches 85% fine-tune macro AUROC,
+        outperforming ImageNet baselines by ~11 AUROC points.
+      </p>
+      <div class="tags">
+        <span class="tag">Self-supervised learning</span>
+        <span class="tag">OCT imaging</span>
+        <span class="tag">AMD</span>
+        <span class="tag highlight">IEEE TMI (under review)</span>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">RETFound fine-tuning for multi-label biomarker detection</div>
+      <p class="r-desc">
+        Adapting RETFound (ViT-Large masked autoencoder pretrained on 1.6M retinal images) via linear
+        probing and full fine-tuning for multi-label AMD biomarker classification on OCT B-scans.
+      </p>
+      <div class="tags">
+        <span class="tag">ViT</span>
+        <span class="tag">Foundation models</span>
+        <span class="tag">Retinal imaging</span>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">Geographic atrophy quantification pipeline</div>
+      <p class="r-desc">
+        BatchGAPipeline for GA area quantification from en-face OCT — processing ~4,000 volumes with
+        histogram matching, nnU-Net segmentation, and producer-consumer threading.
+      </p>
+      <div class="tags">
+        <span class="tag">Segmentation</span>
+        <span class="tag">nnU-Net</span>
+        <span class="tag">Geographic atrophy</span>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<hr>
+
+<!-- ─── PLACES ───────────────────────────────────── -->
+<section id="places">
+  <h2>places i've been</h2>
+  <p style="font-size:13px; color:var(--muted);">
+    Pins on Google My Maps — I add places as I go.
+  </p>
+
+  <div class="map-container">
+    <iframe
+      src="https://www.google.com/maps/d/embed?mid=1y72DiEfL85oLCoN1b9j96eN_xqBfzn4"
+      width="100%"
+      height="400"
+      frameborder="0"
+      style="border:none; display:block;"
+      allowfullscreen
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <div class="country-chips">
+    <!-- Add or remove chips as needed -->
+    <span class="chip">🇮🇳 India</span>
+    <span class="chip">🇺🇸 United States</span>
+    <!-- example: <span class="chip">🇯🇵 Japan</span> -->
+  </div>
+</section>
+
+<hr>
+
+<!-- ─── FOOD ──────────────────────────────────────── -->
+<section id="food">
+  <h2>restaurants worth knowing about</h2>
+  <div class="legend">
+    <span class="dot"></span>
+    <span>dot means it's a favourite</span>
+  </div>
+
+  <ul class="resto-list">
+    <!-- FAVOURITES — keep class="resto-item fav" and include <span class="dot"></span> -->
+    <li class="resto-item fav">
+      <span class="resto-name"><span class="dot"></span>Primanti Brothers</span>
+      <span class="resto-meta">Pittsburgh · Sandwiches</span>
+    </li>
+    <li class="resto-item fav">
+      <span class="resto-name"><span class="dot"></span>[Your favourite — add name]</span>
+      <span class="resto-meta">City · Cuisine</span>
+    </li>
+
+    <!-- NOT FAVOURITES — class="resto-item", no dot -->
+    <li class="resto-item">
+      <span class="resto-name">[Another restaurant]</span>
+      <span class="resto-meta">City · Cuisine</span>
+    </li>
+    <li class="resto-item">
+      <span class="resto-name">[Another restaurant]</span>
+      <span class="resto-meta">City · Cuisine</span>
+    </li>
+    <li class="resto-item">
+      <span class="resto-name">[Another restaurant]</span>
+      <span class="resto-meta">City · Cuisine</span>
+    </li>
+  </ul>
+</section>
+
+<hr>
+
+<!-- ─── WATCHING ──────────────────────────────────── -->
+<section id="watching">
+  <h2>movies &amp; shows i've seen</h2>
+  <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">Ones that stuck with me.</p>
+
+  <div class="movie-grid">
+    <!-- Edit freely — copy a .movie-card to add more -->
+    <div class="movie-card">
+      Interstellar
+      <div class="movie-meta">2014 · film</div>
     </div>
-    
+    <div class="movie-card">
+      The Social Network
+      <div class="movie-meta">2010 · film</div>
     </div>
-
-    <div class="container">
-      <div class="section">
-<!--         <h2 class="section-title">ABOUT ME</h2> -->
-        <div class="block">
-          <h3 class="block-title">
-          </h3>
-          <p>
-            <link rel="stylesheet" href="style.css">
-            I am a fourth-year undergraduate student, pursuing Electrical engineering at the 
-            Indian Institute of Technology, Hyderabad. My primary area of interest lies in 
-            computer vision, with a particular focus on generative AI. However, I'm 
-            still exploring various other sub-fields.
-            
-            Lately, I have developed a keen interest in self-supervised methods for training 
-            and multimodal models. I thoroughly enjoy delving into research papers, watching YouTube videos, 
-            and reading articles that explain various concepts. I am genuinely 
-            fascinated by the innovative techniques that researchers come up with, and I'm always amazed by 
-            their ability to develop such groundbreaking ideas.  
-          </p>
-          <p>
-            In addition to my academic pursuits, I also write articles on Medium, where I aim to explain 
-            various research topics to a broader audience.
-          </p>
-          <p>
-            Beyond my academic and research interests, I am deeply passionate about finance, particularly 
-            trading and investing in stocks. 
-<!--             I have been actively involved in trading and investing since 
-            I was 16 years old. In my leisure time, I like to engage in sports like table tennis and 
-            badminton, as well as enjoy swimming as a form of exercise and relaxation. -->
-          </p>
-          </p>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2 class="section-title">Work Experience</h2>
-        <h3 class="sub_section-title" onclick="toggleContent('wp1')">-> Arrowgold Ornaments (Father's Company): </h3>
-          <div class="block_hidden" id="wp1">
-          <p>
-            <li>Completely automated the task of matching ornaments with the corresponding wax mould. </li>
-            <li>Brought the tagging time from almost a minute per ornament to under 2.5 second.</li>
-            <li>Built the project end-to-end and is currently deployed using ngrok.  </li>
-            </p>
-        </div>
-        
-          <h3 class="sub_section-title" onclick="toggleContent('wp1')">-> Philips (May 23-Jul 23)(DL engineer): </h3>
-          <div class="block_hidden" id="wp1">
-          <p>
-            <li>The project was to develop  a model to classify the lung nodules into different textures. </li>
-            <li>Worked extensively on building and fine tuning different model architecture consisting of simple 2d convolutions to 3d convolutions using pytorch. Learned different ways to preprocess and clean the medical data. </li>
-            </p>
-        </div>
-        
-          <h3 class="sub_section-title" onclick="toggleContent('wp2')">-> FrinksAI (Dec 22-Mar 23)(AI intern):</h3>
-          <div class="block_hidden" id="wp2">
-          <p> 
-            <li>Worked directly under the co-founder, assisting them in creating the models and prototyping.</li>
-            <li>Used Yolov5 and Yolov8 extensively, training them for object detection and segmentation.</li>
-            </p>
-        </div>
-      
-          <h3 class="sub_section-title" onclick="toggleContent('wp3')">-> Snazzy: (May 22-Jul 22)(AI intern):</h3>
-          <div class="block_hidden" id="wp3">
-          <p>
-              <li>Implemented a research paper. It describes the model which can predict how the smile will look after using Aligners.</li>
-              <li>It takes jaw volumetric data, an image of the mouth as input data and then produces the image with teeth properly aligned.</li>
-              <li>Built the dataset (600+ images) by web scraping.</li>
-            </p>
-        </div>
-      </div>
-
-
-    <div class="section">
-      <h2 class="section-title">Competition</h2>
-        <h3 class="sub_section-title" onclick="toggleContent('c1')">-> VIP CUP 2023</h3>
-        <div class="block_hidden" id="c1">
-        <p>Presented our solution at IEEE ICIP 2023, where we came third. </p>
-      </div>
-
-      <h3 class="sub_section-title" onclick="toggleContent('c2')">-> NeurIPS 2023 - Machine Unlearning</h3>
-        <div class="block_hidden" id="c2">
-        <p>Ranked in top 2 percent.</p>
-      </div>
-
-
-      <h2 class="section-title" >Projects</h2>
-        <h3 class="sub_section-title" onclick="toggleContent('p1')">-> Deep Learning based Unsupervised Retinal Layers segmentation using optical coherence tomography (B-Scans):</h3>
-        <div class="block_hidden" id="p1">
-        <li>1. Aim of the project was to train a model that can segment the retinal layers in an unsupervised fashion. </li>
-          <li>2. Model pipeline consists of three different models: ESRGAN for GAN based super-resolution to enhance the 
-            retinal layers, pre-trained Dexined to detect the edges, and denoising autoencoders to remove the noise in edgemaps.</li>
-          <li>3. I am yet to publish the paper in the conference. </li> 
-      </div>
-
-      
-        <h4 class="sub_section-title" onclick="toggleContent('p2')">-> Mini Image generation model (course project with colleagues):(Mar 23-Apr 23)</h3>
-          <div class="block_hidden" id="p2">
-          <li>1. Implemented Vector quantized variational autoencoders. Tried improving it iteratively by trying different 
-            things: Spatially separable convolutions, Wavelet transform, CoAtNet and attention module. Link to report .</li>
-          <li>2. Finally settled with the attention module after seeing the tradeoff between the time to train and accuracy.</li>
-          <li>3. Aim was to build a model that can run on laptop gpu so the computer vision community can benefit from it.</li>
-      </div>
-
-      
-        <h5 class="sub_section-title" onclick="toggleContent('p3')">-> AutoFill captcha (chrome extension):(in collaboration with colleague)(Jul22-Aug22)</h4>
-          <div class="block_hidden" id="p3">
-          <li>Aim for this project was to automate the process of filling captchas and logging in on AIMS(old IITH academic site).</li>
-          <li>>Considering deployment in mind, the model was built using tensorflow which is hosted on a server.</li>
-          <li>Architecture consists of an Artificial Neural Network. As of 5th May '23 it has more than 500 downloads.</li> 
-          <li>Built the dataset from scratch using selenium for web scraping . Preprocessed and cleaned the data by myself.</li>
-      </div>
-
+    <div class="movie-card">
+      Mr. Robot
+      <div class="movie-meta">2015 · series</div>
     </div>
-    <div class="section">
-      <h2 class="section-title">Publications</h2>
-      <div class="block">
-        <h3 class="block-title">->Still trying to get one.</h3>
-        <p>Tried but failed and learned a lot</p>
-      </div>
+    <div class="movie-card">
+      3 Idiots
+      <div class="movie-meta">2009 · film</div>
     </div>
-    <div>
-      <div class="section">
-        <h2 class="section-title">Research interest</h2>
-    <div class="block">
-      <li>I enjoy reading the research papers and have been reading since I was in my 2nd year.</li>
-      <li>I have keen interest in multimodal learning and generative ai and I am currently exploring machine unlearning.</li>
-      <li>Recently I got interested towards unsupervised learning</li>
-      <li>Currently exploring diffusion models, Low rank adaptation, and other papers on face restoration</li>
+    <div class="movie-card">
+      Scam 1992
+      <div class="movie-meta">2020 · series</div>
     </div>
+    <div class="movie-card">
+      Andhadhun
+      <div class="movie-meta">2018 · film</div>
     </div>
-
-    <div class="section">
-      <div class="block">
-        <h3 class="block-title">Reach me at</h3>
-        <p>
-          <a href="mailto:ee20btech11052@iith.ac.in">ee20btech11052@iith.ac.in</a>
-          <a href="mailto:utkarsh13520002@gmail.com">utkarsh13520002@gmail.com</a>
-        </p>
-        <div class="block">
-        <l1>
-<!--           I developed this portfolio website as part of an experiment to determine if the free version of 
-          ChatGPT could be utilized for website creation. Prior to embarking on this project, I had no prior 
-          knowledge of website development. However, with the assistance of ChatGPT, I was able to accomplish
-          this task effortlessly. -->
-          Built this using Chatgpt. 
-        </l1>
-      </div>
-      </div>
+    <div class="movie-card" style="border-style:dashed; color:var(--muted);">
+      + add yours here
+      <div class="movie-meta">year · film/series</div>
     </div>
   </div>
-  
-  <script>
-    function toggleContent(id) {
-      var content = document.getElementById(id);
-      if (content.style.display === "none" || content.style.display === "") {
-        content.style.display = "block";
-      } else {
-        content.style.display = "none";
-      }
-    }
-  </script>
+</section>
 
+<hr>
+
+<!-- ─── HOBBIES ───────────────────────────────────── -->
+<section id="hobbies">
+  <h2>things i enjoy</h2>
+  <ul class="hobby-list">
+    <li>
+      <span class="arrow">→</span>
+      <span>
+        <strong>Reading research papers</strong> — I've been doing this since my second year at IIT.
+        There's something genuinely delightful about seeing the creativity behind an experiment, even when it doesn't pan out.
+      </span>
+    </li>
+    <li>
+      <span class="arrow">→</span>
+      <span>
+        <strong>Finance &amp; markets</strong> — Trading, investing, and thinking about how data
+        and human behavior collide. I find the irrationality as interesting as the math.
+      </span>
+    </li>
+    <li>
+      <span class="arrow">→</span>
+      <span>
+        <strong>Writing</strong> — I post occasionally on
+        <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>,
+        trying to make research ideas a little more human.
+      </span>
+    </li>
+    <li>
+      <span class="arrow">→</span>
+      <span>
+        <!-- Add something personal here -->
+        <strong>[Add something you enjoy]</strong> — edit this line to make it yours.
+      </span>
+    </li>
+  </ul>
+</section>
+
+<footer>
+  <span>Utkarsh Doshi</span>
+  <span>Last updated May 2026</span>
+</footer>
+
+<script>
+  // ── Photo shuffle ──────────────────────────────────────────────
+  // Add your image filenames + optional captions below.
+  // Put the image files in an "images/" folder next to index.html.
+  const photos = [
+    { src: "images/photo1.jpg", caption: "" },
+    { src: "images/photo2.jpg", caption: "" },
+    { src: "images/photo3.jpg", caption: "" },
+    // { src: "images/photo4.jpg", caption: "somewhere nice" },
+  ];
+
+  const pick = photos[Math.floor(Math.random() * photos.length)];
+  const img  = document.getElementById("hero-photo");
+  const cap  = document.getElementById("photo-caption");
+
+  img.style.opacity = "0";
+  img.src = pick.src;
+  cap.textContent = pick.caption;
+
+  img.onload = () => { img.style.opacity = "1"; };
+  img.onerror = () => { img.closest(".photo-wrap").style.display = "none"; };
+  // ──────────────────────────────────────────────────────────────
+</script>
 </body>
 </html>
