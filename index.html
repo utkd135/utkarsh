@@ -309,13 +309,14 @@
 
 <header>
   <h1>Utkarsh Doshi</h1>
-  <p class="subtitle">PhD researcher · University of Pittsburgh · Medical image analysis</p>
+  <p class="subtitle">ML Researcher · CARLAB, University of Pittsburgh · Retinal imaging &amp; AMD</p>
   <div class="photo-wrap">
     <img id="hero-photo" src="" alt="Utkarsh Doshi">
     <p class="photo-caption" id="photo-caption"></p>
   </div>
 
   <div class="contact-links">
+    <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank">Google Scholar</a>
     <a href="https://github.com/utkd135" target="_blank">GitHub</a>
     <a href="https://www.linkedin.com/in/utkarsh-doshi-5920201b9/" target="_blank">LinkedIn</a>
     <a href="https://twitter.com/utkarsh1352002" target="_blank">Twitter</a>
@@ -330,16 +331,17 @@
 <section id="about">
   <h2>about</h2>
   <p>
-    I'm a PhD student at the University of Pittsburgh working on medical image analysis —
-    specifically OCT retinal imaging for age-related macular degeneration (AMD).
-    My research spans self-supervised learning, biomarker classification, segmentation pipelines,
-    and multi-modal image registration.
+    I'm a Machine Learning Researcher at <a href="https://www.carlab.pitt.edu" target="_blank">CARLAB</a>,
+    University of Pittsburgh, working with doctors and medical students to apply deep learning
+    to disease classification and segmentation — with a focus on retinal OCT imaging for
+    age-related macular degeneration (AMD). My work spans multi-label biomarker classification,
+    segmentation pipelines, and multi-modal image registration.
   </p>
   <p>
-    Before Pitt, I did my undergraduate in Electrical Engineering at
-    <a href="https://iith.ac.in" target="_blank">IIT Hyderabad</a>,
-    where I first got pulled into computer vision and learned that nothing beats a well-designed
-    loss function.
+    Before Pitt, I completed my B.Tech in Electrical Engineering at
+    <a href="https://iith.ac.in" target="_blank">IIT Hyderabad</a> (GPA 3.4/4.0),
+    where I first got pulled into computer vision. I've also interned at
+    Philips, Unstudio.ai, FrinksAI, and Snazzy along the way.
   </p>
 </section>
 
@@ -350,24 +352,28 @@
   <h2>updates</h2>
   <ul class="feed">
     <li>
-      <span class="feed-date">May 2026</span>
-      <span>Submitting paper on domain-adapted augmentation for LeJEPA SSL on Spectralis OCT B-scans — targeting <em>IEEE TMI</em>.</span>
+      <span class="feed-date">Apr 2026</span>
+      <span><strong>Oral presentation</strong> at <a href="https://www.arvo.org" target="_blank">ARVO 2026</a>. Awarded Travel Grant.</span>
     </li>
     <li>
-      <span class="feed-date">Sep 2024</span>
-      <span>Started PhD at University of Pittsburgh. Excited about what AMD biomarkers can tell us about disease progression.</span>
+      <span class="feed-date">May 2025</span>
+      <span><strong>Poster presentation</strong> at <a href="https://www.arvo.org" target="_blank">ARVO 2025</a>. Awarded Travel Grant.</span>
+    </li>
+    <li>
+      <span class="feed-date">Aug 2024</span>
+      <span>Joined <a href="https://www.carlab.pitt.edu" target="_blank">CARLAB</a> at University of Pittsburgh as a Machine Learning Researcher.</span>
+    </li>
+    <li>
+      <span class="feed-date">Jul 2024</span>
+      <span>Graduated from IIT Hyderabad with a B.Tech in Electrical Engineering.</span>
+    </li>
+    <li>
+      <span class="feed-date">Oct 2023</span>
+      <span>Represented IIT Hyderabad at <strong>IEEE ICIP 2024</strong> in Kuala Lumpur, Malaysia — won 3rd place ($1,500 prize) in the VIP CUP competition.</span>
     </li>
     <li>
       <span class="feed-date">Nov 2023</span>
       <span>Ranked top 2% at the NeurIPS 2023 Machine Unlearning competition.</span>
-    </li>
-    <li>
-      <span class="feed-date">Oct 2023</span>
-      <span>Presented at <a href="https://2023.ieeeicip.org/" target="_blank">IEEE ICIP 2023</a> — came 3rd in the VIP CUP.</span>
-    </li>
-    <li>
-      <span class="feed-date">May 2023</span>
-      <span>Interned at Philips as a DL engineer — worked on 3D lung nodule texture classification.</span>
     </li>
   </ul>
 </section>
@@ -376,48 +382,102 @@
 
 <!-- ─── RESEARCH ──────────────────────────────────── -->
 <section id="research">
-  <h2>research</h2>
+  <h2>publications</h2>
   <ul class="research-list">
 
     <li class="research-item">
-      <div class="r-title">LeJEPA: domain-adapted SSL for retinal OCT</div>
+      <div class="r-title">Cross-Device Transfer Learning for Volumetric OCT Classification of AMD</div>
       <p class="r-desc">
-        Designing augmentation strategies for a joint-embedding predictive architecture applied to
-        Spectralis OCT B-scans. Targeting AMD biomarker classification (drusen, PED, hypertransmission)
-        with 5-fold patient-level cross-validation. Best config reaches 85% fine-tune macro AUROC,
-        outperforming ImageNet baselines by ~11 AUROC points.
+        Multi-device generalisation for volumetric OCT-based AMD classification using transfer learning.
       </p>
       <div class="tags">
-        <span class="tag">Self-supervised learning</span>
-        <span class="tag">OCT imaging</span>
+        <span class="tag">OCT</span>
         <span class="tag">AMD</span>
-        <span class="tag highlight">IEEE TMI (under review)</span>
+        <span class="tag">Transfer learning</span>
+        <span class="tag highlight">Under Review</span>
       </div>
     </li>
 
     <li class="research-item">
-      <div class="r-title">RETFound fine-tuning for multi-label biomarker detection</div>
+      <div class="r-title">Comparative Evaluation of DL Models for GA Segmentation in En-face OCT Images</div>
       <p class="r-desc">
-        Adapting RETFound (ViT-Large masked autoencoder pretrained on 1.6M retinal images) via linear
-        probing and full fine-tuning for multi-label AMD biomarker classification on OCT B-scans.
-      </p>
-      <div class="tags">
-        <span class="tag">ViT</span>
-        <span class="tag">Foundation models</span>
-        <span class="tag">Retinal imaging</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Geographic atrophy quantification pipeline</div>
-      <p class="r-desc">
-        BatchGAPipeline for GA area quantification from en-face OCT — processing ~4,000 volumes with
-        histogram matching, nnU-Net segmentation, and producer-consumer threading.
+        Systematic benchmark of deep learning architectures for geographic atrophy segmentation
+        on en-face OCT images.
       </p>
       <div class="tags">
         <span class="tag">Segmentation</span>
-        <span class="tag">nnU-Net</span>
         <span class="tag">Geographic atrophy</span>
+        <span class="tag">En-face OCT</span>
+        <span class="tag highlight">Under Review</span>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">Generalizable Multimodal Image Registration via Label-free Vessel Segmentation</div>
+      <p class="r-desc">
+        First-author work on a generalizable multimodal registration framework that leverages
+        label-free vessel segmentation as an intermediate representation.
+      </p>
+      <div class="tags">
+        <span class="tag">Image registration</span>
+        <span class="tag">Multimodal</span>
+        <span class="tag">Vessel segmentation</span>
+        <span class="tag">1st author</span>
+        <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" class="tag" style="color:var(--accent); border-color:var(--accent);">Google Scholar ↗</a>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">Benchmarking Diffusion Models for OCT Fluid Biomarker Segmentation</div>
+      <p class="r-desc">
+        Comparison of diffusion-based generative models against state-of-the-art discriminative
+        architectures for fluid biomarker segmentation in retinal OCT.
+      </p>
+      <div class="tags">
+        <span class="tag">Diffusion models</span>
+        <span class="tag">OCT</span>
+        <span class="tag">Fluid segmentation</span>
+        <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" class="tag" style="color:var(--accent); border-color:var(--accent);">Google Scholar ↗</a>
+      </div>
+    </li>
+
+  </ul>
+
+  <h2>talks &amp; presentations</h2>
+  <ul class="research-list">
+
+    <li class="research-item">
+      <div class="r-title">ARVO 2026 — Oral Presentation</div>
+      <p class="r-desc">
+        Selected for an oral presentation at the Association for Research in Vision and Ophthalmology
+        annual meeting. Awarded Travel Grant.
+      </p>
+      <div class="tags">
+        <span class="tag highlight">Oral · ARVO 2026</span>
+        <span class="tag highlight">Travel Grant</span>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">ARVO 2025 — Poster Presentation</div>
+      <p class="r-desc">
+        Poster presented at ARVO 2025. Awarded Travel Grant.
+      </p>
+      <div class="tags">
+        <span class="tag">Poster · ARVO 2025</span>
+        <span class="tag highlight">Travel Grant</span>
+      </div>
+    </li>
+
+    <li class="research-item">
+      <div class="r-title">IEEE ICIP 2024 — VIP CUP, 3rd Place</div>
+      <p class="r-desc">
+        Represented IIT Hyderabad at IEEE ICIP 2024 in Kuala Lumpur, Malaysia.
+        Awarded $1,500 prize for 3rd place finish.
+      </p>
+      <div class="tags">
+        <span class="tag">IEEE ICIP 2024</span>
+        <span class="tag">Kuala Lumpur</span>
       </div>
     </li>
 
@@ -539,32 +599,27 @@
   <ul class="hobby-list">
     <li>
       <span class="arrow">→</span>
-      <span>
-        <strong>Reading research papers</strong> — I've been doing this since my second year at IIT.
-        There's something genuinely delightful about seeing the creativity behind an experiment, even when it doesn't pan out.
-      </span>
+      <span><strong>Finance &amp; trading</strong> — Investing, markets, and the intersection of data and
+      human behavior. I find the irrationality as interesting as the math.</span>
     </li>
     <li>
       <span class="arrow">→</span>
-      <span>
-        <strong>Finance &amp; markets</strong> — Trading, investing, and thinking about how data
-        and human behavior collide. I find the irrationality as interesting as the math.
-      </span>
+      <span><strong>Traveling</strong> — Exploring new places whenever I can. I try to pin everywhere I go on the map above.</span>
     </li>
     <li>
       <span class="arrow">→</span>
-      <span>
-        <strong>Writing</strong> — I post occasionally on
-        <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>,
-        trying to make research ideas a little more human.
-      </span>
+      <span><strong>Reading research papers</strong> — Been doing this since my second year at IIT.
+      Something genuinely satisfying about a well-designed experiment.</span>
     </li>
     <li>
       <span class="arrow">→</span>
-      <span>
-        <!-- Add something personal here -->
-        <strong>[Add something you enjoy]</strong> — edit this line to make it yours.
-      </span>
+      <span><strong>Nature</strong> — Hiking, being outdoors, generally escaping the screen when I can.</span>
+    </li>
+    <li>
+      <span class="arrow">→</span>
+      <span><strong>Writing</strong> — I post occasionally on
+      <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>,
+      trying to make research ideas more accessible.</span>
     </li>
   </ul>
 </section>
