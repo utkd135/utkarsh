@@ -3,678 +3,834 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Utkarsh Doshi</title>
+<title>Utkarsh Doshi — Machine Learning · Medical Imaging</title>
+<meta name="description" content="Utkarsh Doshi — Machine learning researcher at CAR Lab, University of Pittsburgh. Computer vision, medical imaging, deep learning.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:       #faf8f3;
-    --text:     #1a1918;
-    --muted:    #7d7870;
-    --accent:   #b5451b;
-    --border:   #e2ddd5;
-    --warm:     #f2ede4;
+    --paper:   #fbfaf3;   /* cream drafting paper */
+    --paper-2: #f4f2e8;
+    --ink:     #20242b;   /* graphite ink */
+    --muted:   #6d7480;
+    --faint:   #9aa0aa;
+    --blue:    #2856c0;   /* drafting blue */
+    --blue-bg: rgba(40,86,192,0.07);
+    --amber:   #b06e12;   /* stamp / status */
+    --rule:    #dcd8c8;   /* sheet rules */
+    --grid:    rgba(40,86,192,0.055);
+    --mono:    'IBM Plex Mono', ui-monospace, monospace;
+    --sans:    'Public Sans', system-ui, sans-serif;
+    --display: 'Archivo', system-ui, sans-serif;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family: var(--sans);
     font-size: 15px;
+    font-weight: 300;
     line-height: 1.8;
-    max-width: 680px;
+    padding: clamp(0.6rem, 2.5vw, 2rem);
+  }
+
+  ::selection { background: var(--blue); color: #fff; }
+
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  a:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+  }
+  strong { font-weight: 500; }
+
+  /* ── The drawing sheet ─────────────────────────── */
+  .sheet {
+    max-width: 900px;
     margin: 0 auto;
-    padding: 3.5rem 1.5rem 7rem;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      var(--paper);
+    background-size: 26px 26px, 26px 26px, auto;
+    border: 1.5px solid var(--ink);
+    box-shadow: 0 1px 0 var(--ink), 4px 6px 0 rgba(32,36,43,0.08);
+    position: relative;
   }
+  .sheet::before {           /* inner sheet border, like a real drawing frame */
+    content: "";
+    position: absolute; inset: 8px;
+    border: 1px solid var(--ink);
+    pointer-events: none;
+    opacity: .55;
+  }
+  .inner { padding: clamp(1.4rem, 5vw, 3.2rem); position: relative; }
 
-  /* ── Nav ── */
-  nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.4rem;
-    margin-bottom: 3.5rem;
-    font-size: 12.5px;
-    letter-spacing: 0.02em;
-  }
-  nav a {
+  /* ── Top strip / nav ───────────────────────────── */
+  .topstrip {
+    display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1.3rem;
+    font-family: var(--mono); font-size: 10.5px;
+    letter-spacing: .1em; text-transform: uppercase;
     color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: .9rem; margin-bottom: 2.6rem;
   }
-  nav a:hover { color: var(--text); }
+  .topstrip .dwg { color: var(--blue); }
+  .topstrip nav { margin-left: auto; display: flex; flex-wrap: wrap; gap: 1.1rem; }
+  .topstrip nav a { color: var(--muted); }
+  .topstrip nav a:hover { color: var(--blue); text-decoration: none; }
 
-  /* ── Header ── */
+  /* ── Header ────────────────────────────────────── */
+  .eyebrow {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--blue); margin-bottom: .8rem;
+  }
   h1 {
-    font-family: 'Lora', serif;
-    font-size: 2.3rem;
-    font-weight: 500;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
-    margin-bottom: 0.45rem;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(2.3rem, 6.5vw, 3.6rem);
+    letter-spacing: -0.035em;
+    line-height: 1.02;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
-  .subtitle {
-    color: var(--muted);
-    font-size: 13.5px;
-    margin-bottom: 1.4rem;
-  }
+  .role { color: var(--muted); max-width: 58ch; margin-bottom: 1.5rem; font-size: 15px; }
+  .role em { color: var(--ink); font-style: normal; font-weight: 400; }
+
   .contact-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.3rem 1rem;
-    font-size: 13px;
-    margin-bottom: 0.5rem;
+    display: flex; flex-wrap: wrap; gap: .45rem;
+    font-family: var(--mono); font-size: 11.5px;
+    margin-bottom: 3rem;
   }
   .contact-links a {
-    color: var(--muted);
-    text-decoration: none;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 1px;
-    transition: color 0.15s, border-color 0.15s;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 4px 13px;
+    background: var(--paper);
+    box-shadow: 2px 2px 0 rgba(32,36,43,.9);
+    transition: transform .12s, box-shadow .12s;
   }
   .contact-links a:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    text-decoration: none;
+    transform: translate(1px,1px);
+    box-shadow: 1px 1px 0 rgba(32,36,43,.9);
+    color: var(--blue);
   }
 
-  /* ── Section rhythm ── */
-  hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.8rem 0 0;
+  /* ── Figure 01: the arm ────────────────────────── */
+  .fig {
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    margin-bottom: .6rem;
   }
-  section { scroll-margin-top: 1.5rem; }
+  .fig-head {
+    display: flex; justify-content: space-between; gap: 1rem;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--rule);
+    padding: 7px 12px;
+  }
+  .fig-head b { color: var(--ink); font-weight: 500; }
+  .fig-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .fig svg { display: block; width: 100%; height: auto; }
+  @media (max-width: 640px) { .fig svg { min-width: 640px; } }
 
+  .fig-caption {
+    font-family: var(--mono); font-size: 10.5px;
+    color: var(--faint); letter-spacing: .05em;
+    margin-bottom: 1.6rem;
+  }
+  .fig-caption b { color: var(--muted); font-weight: 400; }
+
+  /* svg drafting styles */
+  .draw    { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+  .draw-thin { stroke: var(--ink); fill: none; stroke-width: 1; opacity: .8; }
+  .fill-paper { fill: var(--paper); }
+  .dim     { stroke: var(--blue); fill: none; stroke-width: 1; }
+  .dim-txt { fill: var(--blue); font-family: var(--mono); font-size: 10.5px; letter-spacing: .04em; }
+  .hatch   { stroke: var(--ink); stroke-width: 1; opacity: .55; }
+  .balloon circle { fill: var(--paper); stroke: var(--blue); stroke-width: 1.3; }
+  .balloon text { fill: var(--blue); font-family: var(--mono); font-size: 11px; font-weight: 500; text-anchor: middle; }
+  .balloon line { stroke: var(--blue); stroke-width: 1; }
+  .centerline { stroke: var(--faint); stroke-width: 1; stroke-dasharray: 9 4 2 4; }
+
+  /* slow articulation */
+  #link-upper { transform-origin: 300px 150px; animation: reach 9s ease-in-out infinite alternate; }
+  #arm-all    { transform-origin: 170px 258px; animation: sway 9s ease-in-out infinite alternate; }
+  @keyframes sway  { from { transform: rotate(0deg); } to { transform: rotate(2.4deg); } }
+  @keyframes reach { from { transform: rotate(0deg); } to { transform: rotate(-3.5deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    #link-upper, #arm-all { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* ── BOM table ─────────────────────────────────── */
+  .bom { width: 100%; border-collapse: collapse; margin-bottom: 3rem; background: var(--paper); }
+  .bom caption {
+    text-align: left; font-family: var(--mono); font-size: 10px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--muted);
+    padding: 0 0 6px 1px;
+  }
+  .bom th, .bom td { border: 1px solid var(--ink); padding: 7px 12px; text-align: left; }
+  .bom th {
+    font-family: var(--mono); font-size: 10px; font-weight: 500;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--paper); background: var(--ink);
+  }
+  .bom td { font-size: 13px; }
+  .bom td:first-child { font-family: var(--mono); color: var(--blue); width: 52px; text-align: center; }
+  .bom td:nth-child(2) { width: 34%; font-weight: 400; }
+  .bom td:last-child { color: var(--muted); font-size: 12.5px; }
+
+  /* ── Sections ──────────────────────────────────── */
+  section { padding: 2.4rem 0 0; margin-bottom: 2.4rem; border-top: 1px solid var(--rule); scroll-margin-top: 1rem; }
   h2 {
-    font-family: 'Lora', serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--text);
-    margin: 2.5rem 0 1rem;
-    letter-spacing: 0.01em;
+    display: flex; align-items: center; gap: 12px;
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 1.4rem;
+  }
+  .datum {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; flex-shrink: 0;
+    border: 1.3px solid var(--ink);
+    font-family: var(--mono); font-size: 11px; color: var(--blue);
+    background: var(--paper);
   }
 
-  p { margin-bottom: 0.85rem; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  p { margin-bottom: .9rem; color: #454b55; }
+  p:last-child { margin-bottom: 0; }
 
-  /* ── Updates feed ── */
-  .feed {
-    list-style: none;
+  .about-grid { display: grid; grid-template-columns: 1fr 152px; gap: 2rem; align-items: start; }
+  .photo-wrap img {
+    width: 152px; height: 152px; object-fit: cover;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    padding: 4px;
+    display: block; transition: opacity .35s ease;
+    box-shadow: 3px 3px 0 rgba(32,36,43,.12);
   }
+  .photo-caption { font-family: var(--mono); font-size: 10px; color: var(--faint); margin-top: 6px; letter-spacing: .05em; }
+
+  /* log */
+  .feed { list-style: none; }
   .feed li {
-    display: grid;
-    grid-template-columns: 68px 1fr;
-    gap: 1.2rem;
-    padding: 0.6rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13.5px;
-    align-items: baseline;
+    display: grid; grid-template-columns: 92px 1fr; gap: 1.2rem;
+    padding: .65rem 0; border-bottom: 1px dashed var(--rule);
+    font-size: 13.5px; align-items: baseline; color: #454b55;
   }
   .feed li:last-child { border-bottom: none; }
   .feed-date {
-    color: var(--muted);
-    font-size: 11.5px;
-    padding-top: 2px;
-    font-variant-numeric: tabular-nums;
+    font-family: var(--mono); font-size: 10.5px;
+    color: var(--faint); letter-spacing: .06em;
+    text-transform: uppercase; font-variant-numeric: tabular-nums;
   }
 
-  /* ── Research cards ── */
+  /* research */
   .research-list { list-style: none; }
-  .research-item {
-    padding: 1.1rem 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .research-item { padding: 1.05rem 0; border-bottom: 1px dashed var(--rule); }
   .research-item:last-child { border-bottom: none; }
-  .r-title {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-  }
-  .r-desc {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.65;
-    margin-bottom: 0.6rem;
-  }
-  .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .r-title { font-size: 14px; font-weight: 400; margin-bottom: .25rem; }
+  .r-desc { color: var(--muted); font-size: 13px; line-height: 1.65; margin-bottom: .55rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .35rem; }
   .tag {
-    font-size: 11px;
-    color: var(--muted);
-    border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 10px; letter-spacing: .05em;
+    color: var(--muted); border: 1px solid var(--rule);
+    background: var(--paper);
     padding: 2px 9px;
-    border-radius: 20px;
   }
-  .tag.highlight {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
+  .tag.first  { border-color: var(--blue); color: var(--blue); background: var(--blue-bg); }
+  .tag.status { border-color: rgba(176,110,18,.45); color: var(--amber); }
 
-  /* ── Map embed ── */
-  .map-container {
-    margin: 1rem 0;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--border);
+  /* experience */
+  .xp { list-style: none; }
+  .xp li {
+    display: grid; grid-template-columns: 150px 1fr; gap: 1.2rem;
+    padding: .9rem 0; border-bottom: 1px dashed var(--rule);
+    font-size: 13.5px;
   }
+  .xp li:last-child { border-bottom: none; }
+  .xp-when { font-family: var(--mono); font-size: 10.5px; color: var(--faint); letter-spacing: .05em; padding-top: 3px; }
+  .xp-role { font-weight: 400; }
+  .xp-org  { color: var(--muted); font-size: 12.5px; }
+  .xp-note { color: var(--muted); font-size: 12.5px; margin-top: 2px; }
 
-  .country-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    margin-top: 1rem;
-  }
+  /* map */
+  .map-container { margin: .4rem 0 1rem; overflow: hidden; border: 1px solid var(--ink); background: var(--paper); }
+  .country-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
   .chip {
-    font-size: 13px;
-    padding: 4px 12px;
-    background: var(--warm);
-    border-radius: 20px;
-    color: var(--text);
-    border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11.5px; padding: 4px 12px;
+    background: var(--paper); color: #454b55; border: 1px solid var(--rule);
   }
 
-  /* ── Restaurants ── */
-  .legend {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 12.5px;
-    color: var(--muted);
-    margin-bottom: 1rem;
-  }
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-    display: inline-block;
-  }
-
+  /* food */
+  .legend { display: flex; align-items: center; gap: 7px; font-family: var(--mono); font-size: 10.5px; color: var(--faint); margin-bottom: .9rem; letter-spacing: .05em; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); flex-shrink: 0; display: inline-block; }
   .resto-list { list-style: none; }
-  .resto-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.65rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13.5px;
-    gap: 1rem;
-  }
+  .resto-item { display: flex; justify-content: space-between; align-items: baseline; padding: .6rem 0; border-bottom: 1px dashed var(--rule); font-size: 13.5px; gap: 1rem; color: #454b55; }
   .resto-item:last-child { border-bottom: none; }
-  .resto-name {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .resto-item.fav .resto-name { font-weight: 500; }
-  .resto-meta { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .resto-name { display: flex; align-items: center; gap: 8px; }
+  .resto-item.fav .resto-name { color: var(--ink); font-weight: 400; }
+  .resto-meta { font-family: var(--mono); color: var(--faint); font-size: 10.5px; white-space: nowrap; letter-spacing: .04em; }
 
-  /* ── Movies grid ── */
-  .movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
+  /* movies */
+  .movie-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .5rem; }
   .movie-card {
-    background: var(--warm);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 0.6rem 0.8rem;
-    font-size: 13px;
-    line-height: 1.45;
+    background: var(--paper); border: 1px solid var(--rule);
+    padding: .6rem .8rem; font-size: 13px; line-height: 1.45; color: #454b55;
+    transition: border-color .15s;
   }
-  .movie-meta { color: var(--muted); font-size: 11px; margin-top: 2px; }
+  .movie-card:hover { border-color: var(--ink); }
+  .movie-meta { font-family: var(--mono); color: var(--faint); font-size: 10px; margin-top: 3px; letter-spacing: .05em; }
 
-  /* ── Hobbies ── */
+  /* hobbies */
   .hobby-list { list-style: none; }
-  .hobby-list li {
-    display: flex;
-    gap: 0.9rem;
-    padding: 0.65rem 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 13.5px;
-    align-items: flex-start;
-  }
+  .hobby-list li { display: flex; gap: .9rem; padding: .65rem 0; border-bottom: 1px dashed var(--rule); font-size: 13.5px; align-items: flex-start; color: #454b55; }
   .hobby-list li:last-child { border-bottom: none; }
-  .arrow { color: var(--muted); flex-shrink: 0; padding-top: 1px; }
+  .arrow { color: var(--blue); flex-shrink: 0; font-family: var(--mono); font-size: 12px; padding-top: 2px; }
 
-  /* ── Footer ── */
-  footer {
-    margin-top: 5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    font-size: 12px;
-    color: var(--muted);
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  /* ── Title block footer ────────────────────────── */
+  .titleblock {
+    margin-top: 3rem;
+    border: 1.3px solid var(--ink);
+    background: var(--paper);
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    font-family: var(--mono);
   }
-
-  /* ── Photo ── */
-  .photo-wrap {
-    margin: 1.8rem 0 0;
-  }
-  .photo-wrap img {
-    width: 136px;
-    height: 136px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid var(--border);
-    display: block;
-    transition: opacity 0.35s ease;
-  }
-  .photo-caption {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 5px;
-    font-style: italic;
+  .tb-cell { border-right: 1px solid var(--ink); padding: 7px 12px 9px; min-width: 0; }
+  .tb-cell:last-child { border-right: none; }
+  .tb-label { font-size: 8.5px; letter-spacing: .14em; text-transform: uppercase; color: var(--faint); display: block; }
+  .tb-value { font-size: 12px; color: var(--ink); letter-spacing: .03em; }
+  .tb-value.blue { color: var(--blue); }
+  @media (max-width: 560px) {
+    .titleblock { grid-template-columns: 1fr 1fr; }
+    .tb-cell:nth-child(2) { border-right: none; }
+    .tb-cell:nth-child(1), .tb-cell:nth-child(2) { border-bottom: 1px solid var(--ink); }
   }
 
-  /* ── Fade-in on load ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  body > * {
-    animation: fadeUp 0.5s ease both;
-  }
-  nav    { animation-delay: 0.05s; }
-  header { animation-delay: 0.12s; }
-  hr:first-of-type { animation-delay: 0.18s; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  header, section, .fig, .bom { animation: fadeUp .5s ease both; }
+  @media (prefers-reduced-motion: reduce) { header, section, .fig, .bom { animation: none; } }
 
-  @media (max-width: 520px) {
-    body { padding: 2rem 1.2rem 5rem; }
-    h1   { font-size: 1.9rem; }
-    .feed li { grid-template-columns: 58px 1fr; }
+  @media (max-width: 620px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .photo-wrap { order: -1; }
+    .xp li { grid-template-columns: 1fr; gap: .1rem; }
+    .feed li { grid-template-columns: 74px 1fr; gap: .8rem; }
   }
 </style>
 </head>
 <body>
 
-<nav>
-  <a href="#about">about</a>
-  <a href="#updates">updates</a>
-  <a href="#research">research</a>
-  <a href="#places">places</a>
-  <a href="#food">food</a>
-  <a href="#watching">watching</a>
-  <a href="#hobbies">hobbies</a>
-</nav>
+<div class="sheet">
+<div class="inner">
 
-<header>
-  <h1>Utkarsh Doshi</h1>
-  <p class="subtitle">ML Researcher · CAR Lab, University of Pittsburgh · Retinal imaging &amp; AMD</p>
-  <div class="photo-wrap">
-    <img id="hero-photo" src="" alt="Utkarsh Doshi">
-    <p class="photo-caption" id="photo-caption"></p>
+  <!-- top strip -->
+  <div class="topstrip">
+    <span class="dwg">DWG № UD-2026</span>
+    <span>MACHINE LEARNING · MEDICAL IMAGING</span>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#updates">Log</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#offduty">Off-duty</a>
+    </nav>
   </div>
 
-  <div class="contact-links">
-    <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank">Google Scholar</a>
-    <a href="https://github.com/utkd135" target="_blank">GitHub</a>
-    <a href="https://www.linkedin.com/in/utkarsh-doshi-5920201b9/" target="_blank">LinkedIn</a>
-    <a href="https://twitter.com/utkarsh1352002" target="_blank">Twitter</a>
-    <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>
-    <a href="mailto:utkarsh13520002@gmail.com">Email</a>
+  <header>
+    <p class="eyebrow">General assembly — researcher, one (1) unit</p>
+    <h1>Utkarsh<br>Doshi</h1>
+    <p class="role">
+      Machine learning researcher at the <em>Choroidal Analysis &amp; Research (CAR) Lab</em>,
+      University of Pittsburgh School of Medicine — building vision systems for medical
+      imaging: classification, segmentation, and representation learning that hold up
+      outside the lab.
+    </p>
+
+    <div class="contact-links">
+      <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+      <a href="https://github.com/utkd135" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/utkarsh-doshi-5920201b9/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://x.com/utkarsh1352002" target="_blank" rel="noopener">X / Twitter</a>
+      <a href="https://medium.com/@utkarsh135" target="_blank" rel="noopener">Medium</a>
+      <a href="mailto:utkarsh13520002@gmail.com">Email</a>
+    </div>
+
+    <!-- ── fig. 01 : the arm ── -->
+    <div class="fig" aria-label="Technical line drawing of a robotic arm with a camera end effector, annotated with numbered balloons that map to the parts list below">
+      <div class="fig-head">
+        <span>FIG. 01 — <b>VISION SYSTEM, ARTICULATED</b></span>
+        <span>SCALE <b>NTS</b></span>
+        <span>THIRD-ANGLE PROJECTION</span>
+      </div>
+      <div class="fig-scroll">
+      <svg viewBox="0 0 900 360" role="img">
+
+        <!-- overall dimension, top -->
+        <g class="dim">
+          <line x1="120" y1="38" x2="640" y2="38"/>
+          <line x1="120" y1="30" x2="120" y2="46"/>
+          <line x1="640" y1="30" x2="640" y2="46"/>
+          <path d="M128,38 l9,-3.5 v7 z" fill="var(--blue)" stroke="none"/>
+          <path d="M632,38 l-9,-3.5 v7 z" fill="var(--blue)" stroke="none"/>
+        </g>
+        <text class="dim-txt" x="380" y="30" text-anchor="middle">IIT HYDERABAD 2020 — PITTSBURGH 2026</text>
+
+        <!-- ground + hatching -->
+        <line class="draw" x1="60" y1="300" x2="560" y2="300"/>
+        <g class="hatch">
+          <line x1="70"  y1="300" x2="56"  y2="316"/>
+          <line x1="100" y1="300" x2="86"  y2="316"/>
+          <line x1="130" y1="300" x2="116" y2="316"/>
+          <line x1="160" y1="300" x2="146" y2="316"/>
+          <line x1="190" y1="300" x2="176" y2="316"/>
+          <line x1="220" y1="300" x2="206" y2="316"/>
+          <line x1="250" y1="300" x2="236" y2="316"/>
+          <line x1="280" y1="300" x2="266" y2="316"/>
+          <line x1="310" y1="300" x2="296" y2="316"/>
+          <line x1="340" y1="300" x2="326" y2="316"/>
+          <line x1="370" y1="300" x2="356" y2="316"/>
+          <line x1="400" y1="300" x2="386" y2="316"/>
+          <line x1="430" y1="300" x2="416" y2="316"/>
+          <line x1="460" y1="300" x2="446" y2="316"/>
+          <line x1="490" y1="300" x2="476" y2="316"/>
+          <line x1="520" y1="300" x2="506" y2="316"/>
+          <line x1="550" y1="300" x2="536" y2="316"/>
+        </g>
+
+        <!-- base plate -->
+        <rect class="draw fill-paper" x="110" y="284" width="120" height="16"/>
+        <circle class="draw-thin" cx="126" cy="292" r="3.5"/>
+        <circle class="draw-thin" cx="214" cy="292" r="3.5"/>
+
+        <g id="arm-all">
+          <!-- base column -->
+          <path class="draw fill-paper" d="M150,284 L150,262 Q150,252 160,252 L180,252 Q190,252 190,262 L190,284 Z"/>
+
+          <!-- shoulder joint J1 -->
+          <circle class="draw fill-paper" cx="170" cy="252" r="17"/>
+          <circle class="draw-thin" cx="170" cy="252" r="6"/>
+          <line class="centerline" x1="146" y1="252" x2="194" y2="252"/>
+          <line class="centerline" x1="170" y1="228" x2="170" y2="276"/>
+
+          <!-- lower link J1→J2 -->
+          <path class="draw fill-paper" d="M161,238 L291,140 Q300,133 309,140 L309,141 Q314,149 306,156 L179,266 Q170,272 163,264 Q156,256 161,238 Z"/>
+          <circle class="draw-thin" cx="238" cy="200" r="4"/>
+
+          <g id="link-upper">
+            <!-- elbow joint J2 -->
+            <circle class="draw fill-paper" cx="300" cy="150" r="15"/>
+            <circle class="draw-thin" cx="300" cy="150" r="5.5"/>
+
+            <!-- upper link J2→wrist -->
+            <path class="draw fill-paper" d="M303,137 L468,168 Q477,170 476,179 Q474,188 465,187 L299,163 Q290,161 292,151 Q294,141 303,137 Z"/>
+            <circle class="draw-thin" cx="384" cy="163" r="4"/>
+
+            <!-- wrist -->
+            <circle class="draw fill-paper" cx="472" cy="177" r="11"/>
+            <circle class="draw-thin" cx="472" cy="177" r="4"/>
+
+            <!-- camera end effector -->
+            <g>
+              <rect class="draw fill-paper" x="483" y="160" width="58" height="36" rx="4"/>
+              <rect class="draw-thin fill-paper" x="493" y="152" width="18" height="8" rx="2"/>
+              <!-- lens -->
+              <circle class="draw fill-paper" cx="556" cy="178" r="15"/>
+              <circle class="draw-thin" cx="556" cy="178" r="8"/>
+              <circle cx="559" cy="174" r="2.4" fill="var(--ink)"/>
+              <!-- field of view -->
+              <g class="dim" stroke-dasharray="5 5" opacity=".8">
+                <line x1="571" y1="172" x2="668" y2="132"/>
+                <line x1="571" y1="184" x2="668" y2="224"/>
+              </g>
+              <!-- target: a scan slice -->
+              <g>
+                <rect class="draw-thin fill-paper" x="668" y="126" width="112" height="104"/>
+                <path class="draw-thin" d="M676,168 C696,160 716,158 734,166 C748,172 762,172 772,166" opacity=".9"/>
+                <path class="draw-thin" d="M676,186 C700,180 740,180 772,186" opacity=".9"/>
+                <path class="draw-thin" d="M676,204 C700,210 740,210 772,204" opacity=".6"/>
+                <text x="724" y="146" text-anchor="middle" style="font-family:var(--mono); font-size:9px; fill:var(--faint); letter-spacing:.08em;">SPECIMEN</text>
+                <text x="724" y="222" text-anchor="middle" style="font-family:var(--mono); font-size:9px; fill:var(--faint); letter-spacing:.08em;">RETINA, HUMAN</text>
+              </g>
+            </g>
+          </g>
+        </g>
+
+        <!-- balloons -->
+        <g class="balloon">
+          <line x1="170" y1="269" x2="118" y2="330"/>
+          <circle cx="108" cy="338" r="13"/>
+          <text x="108" y="342">1</text>
+        </g>
+        <g class="balloon">
+          <line x1="238" y1="196" x2="238" y2="106"/>
+          <circle cx="238" cy="96" r="13"/>
+          <text x="238" y="100">2</text>
+        </g>
+        <g class="balloon">
+          <line x1="384" y1="159" x2="384" y2="86"/>
+          <circle cx="384" cy="76" r="13"/>
+          <text x="384" y="80">3</text>
+        </g>
+        <g class="balloon">
+          <line x1="512" y1="196" x2="512" y2="262"/>
+          <circle cx="512" cy="274" r="13"/>
+          <text x="512" y="278">4</text>
+        </g>
+        <g class="balloon">
+          <line x1="724" y1="230" x2="724" y2="296"/>
+          <circle cx="724" cy="308" r="13"/>
+          <text x="724" y="312">5</text>
+        </g>
+
+        <!-- small note -->
+        <text x="60" y="70" style="font-family:var(--mono); font-size:10px; fill:var(--faint); letter-spacing:.06em;">NOTES:</text>
+        <text x="60" y="86" style="font-family:var(--mono); font-size:10px; fill:var(--faint); letter-spacing:.06em;">1. BALLOONS REF. PARTS LIST</text>
+        <text x="60" y="102" style="font-family:var(--mono); font-size:10px; fill:var(--faint); letter-spacing:.06em;">2. BREAK ALL SHARP EDGES</text>
+      </svg>
+      </div>
+    </div>
+    <p class="fig-caption"><b>fig. 01</b> — general arrangement. balloons reference the parts list below.</p>
+
+    <!-- ── parts list ── -->
+    <table class="bom">
+      <caption>Parts list — bill of materials</caption>
+      <thead>
+        <tr><th>Item</th><th>Component</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Base, structural</td>
+          <td>B.Tech Electrical Engineering, IIT Hyderabad — signals, systems, and the habit of reading papers.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Actuator, primary</td>
+          <td>Deep learning — PyTorch, CNNs &amp; transformers, trained on Azure, tuned on stubbornness.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Linkage, extended reach</td>
+          <td>Self-supervised &amp; representation learning — labels are expensive; make the data teach itself.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>End effector, vision module</td>
+          <td>Computer vision — classification, segmentation, multimodal image registration.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Specimen, primary target</td>
+          <td>Retinal OCT &amp; age-related macular degeneration, in collaboration with clinicians at CAR Lab.</td>
+        </tr>
+      </tbody>
+    </table>
+  </header>
+
+  <!-- ─── ABOUT ─────────────────────────────────── -->
+  <section id="about">
+    <h2><span class="datum">A</span>About</h2>
+    <div class="about-grid">
+      <div>
+        <p>
+          I work at the <a href="https://www.choroidanalyticsresearch.com" target="_blank" rel="noopener">CAR Lab</a>
+          under <a href="https://www.ophthalmology.pitt.edu/people/jay-chhablani-md" target="_blank" rel="noopener">Dr.&nbsp;Jay Chhablani</a>
+          (Professor of Ophthalmology &amp; retina specialist),
+          <a href="https://www.ophthalmology.pitt.edu/people/kiran-kumar-vupparaboina-phd" target="_blank" rel="noopener">Dr.&nbsp;Kiran Kumar Vupparaboina</a>
+          (AI &amp; medical imaging), and
+          <a href="https://www.ophthalmology.pitt.edu/people/sandeep-bollepalli-phd" target="_blank" rel="noopener">Dr.&nbsp;Sandeep Bollepalli</a>.
+        </p>
+        <p>
+          My focus is retinal OCT for age-related macular degeneration — self-supervised
+          representation learning, multi-label biomarker classification, segmentation pipelines,
+          and multimodal image registration. I sit close to clinicians, and I care about models
+          that survive contact with a real clinic: different devices, messy scans, rare biomarkers.
+        </p>
+        <p>
+          Before Pitt: B.Tech in Electrical Engineering at
+          <a href="https://iith.ac.in" target="_blank" rel="noopener">IIT Hyderabad</a>, where computer
+          vision first pulled me in — plus internships at Philips Innovation Campus, Unstudio.ai,
+          FrinksAI, and Snazzy (YC-backed).
+        </p>
+      </div>
+      <div class="photo-wrap">
+        <img id="hero-photo" src="" alt="Utkarsh Doshi">
+        <p class="photo-caption" id="photo-caption"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── UPDATES ───────────────────────────────── -->
+  <section id="updates">
+    <h2><span class="datum">B</span>Revision Log</h2>
+    <ul class="feed">
+      <li>
+        <span class="feed-date">Aug 2026</span>
+        <span>Stepping into the <strong>Data Scientist I</strong> role at CAR Lab, University of Pittsburgh.</span>
+      </li>
+      <li>
+        <span class="feed-date">Apr 2026</span>
+        <span><strong>Oral presentation</strong> at <a href="https://www.arvo.org" target="_blank" rel="noopener">ARVO 2026</a> — cross-device transfer learning for volumetric OCT classification of AMD. Awarded a travel grant.</span>
+      </li>
+      <li>
+        <span class="feed-date">2026</span>
+        <span><strong>Poster</strong> at the Stanford AIMI Symposium — augmentation design principles for self-supervised learning on grayscale OCT B-scans.</span>
+      </li>
+      <li>
+        <span class="feed-date">May 2025</span>
+        <span><strong>Poster</strong> at <a href="https://www.arvo.org" target="_blank" rel="noopener">ARVO 2025</a> — automated ellipsoid-zone detection in geographic atrophy.</span>
+      </li>
+      <li>
+        <span class="feed-date">Aug 2024</span>
+        <span>Joined the <a href="https://www.choroidanalyticsresearch.com" target="_blank" rel="noopener">CAR Lab</a> at the University of Pittsburgh as a machine learning researcher.</span>
+      </li>
+      <li>
+        <span class="feed-date">Jul 2024</span>
+        <span>Graduated from IIT Hyderabad — B.Tech, Electrical Engineering.</span>
+      </li>
+      <li>
+        <span class="feed-date">2024</span>
+        <span>Represented IIT Hyderabad at <strong>IEEE ICIP 2024</strong> in Kuala Lumpur — 3rd place ($1,500) in the VIP Cup.</span>
+      </li>
+      <li>
+        <span class="feed-date">Nov 2023</span>
+        <span>Ranked in the top 2% of the <strong>NeurIPS 2023</strong> Machine Unlearning competition.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── RESEARCH ──────────────────────────────── -->
+  <section id="research">
+    <h2><span class="datum">C</span>Publications</h2>
+    <ul class="research-list">
+
+      <li class="research-item">
+        <div class="r-title">Cross-Device Transfer Learning for Volumetric OCT Classification of AMD</div>
+        <p class="r-desc">Making volumetric AMD classifiers generalize across OCT devices via transfer learning — the gap that quietly breaks most clinical deployments.</p>
+        <div class="tags">
+          <span class="tag first">1st author</span>
+          <span class="tag">OCT</span><span class="tag">AMD</span><span class="tag">transfer learning</span>
+          <span class="tag status">under review</span>
+        </div>
+      </li>
+
+      <li class="research-item">
+        <div class="r-title">Comparative Evaluation of DL Models for GA Segmentation in En-face OCT Images</div>
+        <p class="r-desc">A systematic benchmark of deep learning architectures for geographic-atrophy segmentation on en-face OCT.</p>
+        <div class="tags">
+          <span class="tag first">1st author</span>
+          <span class="tag">segmentation</span><span class="tag">geographic atrophy</span>
+          <span class="tag status">under review</span>
+        </div>
+      </li>
+
+      <li class="research-item">
+        <div class="r-title">Generalizable Multimodal Image Registration via Label-free Vessel Segmentation</div>
+        <p class="r-desc">A registration framework that uses label-free vessel segmentation as a shared intermediate representation across imaging modalities.</p>
+        <div class="tags">
+          <span class="tag first">1st author</span>
+          <span class="tag">registration</span><span class="tag">multimodal</span>
+          <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" rel="noopener" class="tag" style="color:var(--blue); border-color:var(--blue);">Scholar ↗</a>
+        </div>
+      </li>
+
+      <li class="research-item">
+        <div class="r-title">Benchmarking Diffusion Models for OCT Fluid Biomarker Segmentation</div>
+        <p class="r-desc">Diffusion-based generative models vs. state-of-the-art discriminative architectures for fluid segmentation in retinal OCT.</p>
+        <div class="tags">
+          <span class="tag">co-author</span>
+          <span class="tag">diffusion models</span><span class="tag">fluid segmentation</span>
+          <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" rel="noopener" class="tag" style="color:var(--blue); border-color:var(--blue);">Scholar ↗</a>
+        </div>
+      </li>
+
+      <li class="research-item">
+        <div class="r-title">DL-Based Automated Segmentation &amp; Quantification of Ellipsoid Zone and RPE–Bruch's Membrane</div>
+        <p class="r-desc">Automated quantification of the ellipsoid zone and RPE–Bruch's membrane in healthy subjects and geographic atrophy.</p>
+        <div class="tags">
+          <span class="tag">co-author</span>
+          <span class="tag">retinal segmentation</span>
+          <span class="tag status">under review</span>
+        </div>
+      </li>
+
+      <li class="research-item">
+        <div class="r-title">Enrichment Ratio Analysis of Choroidal Vascularity for Recurrence in CSC</div>
+        <p class="r-desc">Choroidal vascularity enrichment ratio as a predictor of recurrence in central serous chorioretinopathy.</p>
+        <div class="tags">
+          <span class="tag">co-author</span>
+          <span class="tag">choroid</span><span class="tag">biomarkers</span>
+          <span class="tag status">under review</span>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <!-- ─── EXPERIENCE ────────────────────────────── -->
+  <section id="experience">
+    <h2><span class="datum">D</span>Experience</h2>
+    <ul class="xp">
+      <li>
+        <span class="xp-when">Aug 2024 — now</span>
+        <span>
+          <span class="xp-role">ML Researcher → Data Scientist I</span>
+          <div class="xp-org">CAR Lab · University of Pittsburgh School of Medicine</div>
+          <div class="xp-note">Deep learning for medical image classification &amp; segmentation, built with clinicians for disease quantification and early diagnosis. Python · PyTorch · Azure.</div>
+        </span>
+      </li>
+      <li>
+        <span class="xp-when">Dec 2023 — Jan 2024</span>
+        <span>
+          <span class="xp-role">ML Intern</span>
+          <div class="xp-org">Unstudio.ai · remote</div>
+          <div class="xp-note">Optimized inference for fine-tuned SDXL; trained LoRA and T2I adapters.</div>
+        </span>
+      </li>
+      <li>
+        <span class="xp-when">May — Jul 2023</span>
+        <span>
+          <span class="xp-role">ML Engineer Intern</span>
+          <div class="xp-org">Philips Innovation Campus · Bengaluru</div>
+          <div class="xp-note">96% accuracy on lung-nodule classification on a highly imbalanced dataset.</div>
+        </span>
+      </li>
+      <li>
+        <span class="xp-when">Dec 2022 — Mar 2023</span>
+        <span>
+          <span class="xp-role">ML Intern</span>
+          <div class="xp-org">FrinksAI · remote</div>
+          <div class="xp-note">YOLOv5/v8 evaluation and instance segmentation. Received a full-time offer.</div>
+        </span>
+      </li>
+      <li>
+        <span class="xp-when">May — Jul 2022</span>
+        <span>
+          <span class="xp-role">ML Intern</span>
+          <div class="xp-org">Snazzy (YC) · remote</div>
+          <div class="xp-note">Implemented a paper from scratch to visualize post-aligner smiles; built a 600+ image dataset.</div>
+        </span>
+      </li>
+      <li>
+        <span class="xp-when">2020 — 2024</span>
+        <span>
+          <span class="xp-role">B.Tech, Electrical Engineering</span>
+          <div class="xp-org">Indian Institute of Technology, Hyderabad</div>
+          <div class="xp-note">Also: a captcha decoder for the academic portal with 800+ downloads.</div>
+        </span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── OFF-DUTY ──────────────────────────────── -->
+  <section id="offduty">
+    <h2><span class="datum">E</span>Places I've Been</h2>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/d/embed?mid=1y72DiEfL85oLCoN1b9j96eN_xqBfzn4"
+        width="100%" height="400" frameborder="0"
+        style="border:none; display:block;"
+        allowfullscreen loading="lazy" title="Places I've been"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="country-chips">
+      <span class="chip">🇮🇳 India</span>
+      <span class="chip">🇺🇸 United States</span>
+      <span class="chip">🇲🇾 Malaysia</span>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="datum">F</span>Restaurants Worth Knowing About</h2>
+    <div class="legend"><span class="dot"></span><span>dot = a favourite</span></div>
+    <ul class="resto-list">
+      <li class="resto-item fav">
+        <span class="resto-name"><span class="dot"></span>Apteka</span>
+        <span class="resto-meta">Pittsburgh · Eastern European vegan</span>
+      </li>
+      <li class="resto-item fav">
+        <span class="resto-name"><span class="dot"></span>Allegro</span>
+        <span class="resto-meta">Pittsburgh · Italian</span>
+      </li>
+      <li class="resto-item">
+        <span class="resto-name">Primanti Brothers</span>
+        <span class="resto-meta">Pittsburgh · sandwiches</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="datum">G</span>Movies &amp; Shows That Stuck</h2>
+    <div class="movie-grid">
+      <div class="movie-card">The Lord of the Rings<div class="movie-meta">2001–03 · trilogy</div></div>
+      <div class="movie-card">Attack on Titan<div class="movie-meta">2013–23 · series</div></div>
+      <div class="movie-card">Interstellar<div class="movie-meta">2014 · film</div></div>
+      <div class="movie-card">Inception<div class="movie-meta">2010 · film</div></div>
+      <div class="movie-card">Avatar<div class="movie-meta">2009 · film</div></div>
+      <div class="movie-card">Oppenheimer<div class="movie-meta">2023 · film</div></div>
+      <div class="movie-card">Arrival<div class="movie-meta">2016 · film</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="datum">H</span>Things I Enjoy</h2>
+    <ul class="hobby-list">
+      <li><span class="arrow">▸</span><span><strong>Finance &amp; trading</strong> — markets as data plus human behavior. The irrationality is as interesting as the math.</span></li>
+      <li><span class="arrow">▸</span><span><strong>Traveling</strong> — I pin everywhere I go on the map above.</span></li>
+      <li><span class="arrow">▸</span><span><strong>Reading papers</strong> — since second year at IIT. A well-designed experiment is genuinely satisfying.</span></li>
+      <li><span class="arrow">▸</span><span><strong>Nature</strong> — hiking, being outdoors, escaping the screen.</span></li>
+      <li><span class="arrow">▸</span><span><strong>Writing</strong> — occasional posts on <a href="https://medium.com/@utkarsh135" target="_blank" rel="noopener">Medium</a>, trying to make research ideas more accessible.</span></li>
+    </ul>
+  </section>
+
+  <!-- ── title block ── -->
+  <div class="titleblock" role="contentinfo">
+    <div class="tb-cell">
+      <span class="tb-label">Title</span>
+      <span class="tb-value">UTKARSH DOSHI — PERSONAL SITE</span>
+    </div>
+    <div class="tb-cell">
+      <span class="tb-label">Drawn by</span>
+      <span class="tb-value">U. DOSHI</span>
+    </div>
+    <div class="tb-cell">
+      <span class="tb-label">Rev</span>
+      <span class="tb-value blue">JUL 2026</span>
+    </div>
+    <div class="tb-cell">
+      <span class="tb-label">Scale / Sheet</span>
+      <span class="tb-value">NTS · 1/1</span>
+    </div>
   </div>
-</header>
 
-<hr>
-
-<!-- ─── ABOUT ─────────────────────────────────────── -->
-<section id="about">
-  <h2>about</h2>
-  <p>
-    I'm a Machine Learning Researcher at the
-    <a href="https://www.choroidanalyticsresearch.com" target="_blank">Choroidal Analysis and Research (CAR) Lab</a>
-    at the University of Pittsburgh School of Medicine, working under
-    <a href="https://www.ophthalmology.pitt.edu/people/jay-chhablani-md" target="_blank">Dr. Jay Chhablani</a>
-    (Professor of Ophthalmology &amp; retina specialist) and
-    <a href="https://www.ophthalmology.pitt.edu/people/kiran-kumar-vupparaboina-phd" target="_blank">Dr. Kiran Kumar Vupparaboina</a>
-    (Research Assistant Professor, AI &amp; medical imaging) and 
-    <a href="https://www.ophthalmology.pitt.edu/people/sandeep-bollepalli-phd" target="_blank">Dr. Sandeep Bollepalli</a>.
-  </p>
-  <p>
-    My work focuses on retinal OCT imaging for age-related macular degeneration (AMD) —
-    spanning self-supervised representation learning, multi-label biomarker classification,
-    segmentation pipelines, and multimodal image registration. I work closely with clinicians
-    to build AI tools that are actually useful at the bedside.
-  </p>
-  <p>
-    Before Pitt, I completed my B.Tech in Electrical Engineering at
-    <a href="https://iith.ac.in" target="_blank">IIT Hyderabad</a> (CGPA 8.17/10),
-    where I first got pulled into computer vision. I've also interned at
-    Philips Innovation Campus, Unstudio.ai, FrinksAI, and Snazzy (YC-backed) along the way.
-  </p>
-</section>
-
-<hr>
-
-<!-- ─── UPDATES ───────────────────────────────────── -->
-<section id="updates">
-  <h2>updates</h2>
-  <ul class="feed">
-    <li>
-      <span class="feed-date">Apr 2026</span>
-      <span><strong>Oral presentation</strong> at <a href="https://www.arvo.org" target="_blank">ARVO 2026</a>. Awarded Travel Grant.</span>
-    </li>
-    <li>
-      <span class="feed-date">May 2025</span>
-      <span><strong>Poster presentation</strong> at <a href="https://www.arvo.org" target="_blank">ARVO 2025</a>.</span>
-    </li>
-    <li>
-      <span class="feed-date">Aug 2024</span>
-      <span>Joined <a href="https://www.choroidanalyticsresearch.com" target="_blank">CARLAB</a> at University of Pittsburgh as a Machine Learning Researcher.</span>
-    </li>
-    <li>
-      <span class="feed-date">Jul 2024</span>
-      <span>Graduated from IIT Hyderabad with a B.Tech in Electrical Engineering.</span>
-    </li>
-    <li>
-      <span class="feed-date">Oct 2023</span>
-      <span>Represented IIT Hyderabad at <strong>IEEE ICIP 2024</strong> in Kuala Lumpur, Malaysia — won 3rd place ($1,500 prize) in the VIP CUP competition.</span>
-    </li>
-    <li>
-      <span class="feed-date">Nov 2023</span>
-      <span>Ranked top 2% at the NeurIPS 2023 Machine Unlearning competition.</span>
-    </li>
-  </ul>
-</section>
-
-<hr>
-
-<!-- ─── RESEARCH ──────────────────────────────────── -->
-<section id="research">
-  <h2>publications</h2>
-  <ul class="research-list">
-
-    <li class="research-item">
-      <div class="r-title">Cross-Device Transfer Learning for Volumetric OCT Classification of AMD</div>
-      <p class="r-desc">
-        Multi-device generalisation for volumetric OCT-based AMD classification using transfer learning.
-      </p>
-      <div class="tags">
-        <span class="tag">OCT</span>
-        <span class="tag">AMD</span>
-        <span class="tag">Transfer learning</span>
-        <span class="tag highlight">Under Review</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Comparative Evaluation of DL Models for GA Segmentation in En-face OCT Images</div>
-      <p class="r-desc">
-        Systematic benchmark of deep learning architectures for geographic atrophy segmentation
-        on en-face OCT images.
-      </p>
-      <div class="tags">
-        <span class="tag">Segmentation</span>
-        <span class="tag">Geographic atrophy</span>
-        <span class="tag">En-face OCT</span>
-        <span class="tag highlight">Under Review</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Generalizable Multimodal Image Registration via Label-free Vessel Segmentation</div>
-      <p class="r-desc">
-        First-author work on a generalizable multimodal registration framework that leverages
-        label-free vessel segmentation as an intermediate representation.
-      </p>
-      <div class="tags">
-        <span class="tag">Image registration</span>
-        <span class="tag">Multimodal</span>
-        <span class="tag">Vessel segmentation</span>
-        <span class="tag">1st author</span>
-        <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" class="tag" style="color:var(--accent); border-color:var(--accent);">Google Scholar ↗</a>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Benchmarking Diffusion Models for OCT Fluid Biomarker Segmentation</div>
-      <p class="r-desc">
-        Comparison of diffusion-based generative models against state-of-the-art discriminative
-        architectures for fluid biomarker segmentation in retinal OCT.
-      </p>
-      <div class="tags">
-        <span class="tag">Diffusion models</span>
-        <span class="tag">OCT</span>
-        <span class="tag">Fluid segmentation</span>
-        <span class="tag">Co-author</span>
-        <a href="https://scholar.google.com/citations?user=qV5VaIAAAAAJ&hl=en" target="_blank" class="tag" style="color:var(--accent); border-color:var(--accent);">Google Scholar ↗</a>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Deep Learning-Based Automated Segmentation and Quantification of Retinal Structures in OCT</div>
-      <p class="r-desc">
-        Co-authored work on automated segmentation and quantification of retinal structures
-        from OCT imaging using deep learning.
-      </p>
-      <div class="tags">
-        <span class="tag">Retinal segmentation</span>
-        <span class="tag">OCT</span>
-        <span class="tag">Co-author</span>
-        <span class="tag highlight">Under Review</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">Enrichment Ratio Analysis for Recurrence Prediction in Central Serous Chorioretinopathy</div>
-      <p class="r-desc">
-        Co-authored study using enrichment ratio analysis as a biomarker for predicting
-        recurrence in central serous chorioretinopathy (CSC).
-      </p>
-      <div class="tags">
-        <span class="tag">Chorioretinopathy</span>
-        <span class="tag">Biomarker analysis</span>
-        <span class="tag">Co-author</span>
-        <span class="tag highlight">Under Review</span>
-      </div>
-    </li>
-
-  </ul>
-
-  <h2>talks &amp; presentations</h2>
-  <ul class="research-list">
-
-    <li class="research-item">
-      <div class="r-title">ARVO 2026 — Oral Presentation</div>
-      <p class="r-desc">
-        Selected for an oral presentation at the Association for Research in Vision and Ophthalmology
-        annual meeting. Awarded Travel Grant.
-      </p>
-      <div class="tags">
-        <span class="tag highlight">Oral · ARVO 2026</span>
-        <span class="tag highlight">Travel Grant</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">ARVO 2025 — Poster Presentation</div>
-      <p class="r-desc">
-        Poster presented at ARVO 2025. Awarded Travel Grant.
-      </p>
-      <div class="tags">
-        <span class="tag">Poster · ARVO 2025</span>
-        <span class="tag highlight">Travel Grant</span>
-      </div>
-    </li>
-
-    <li class="research-item">
-      <div class="r-title">IEEE ICIP 2024 — VIP CUP, 3rd Place</div>
-      <p class="r-desc">
-        Represented IIT Hyderabad at IEEE ICIP 2024 in Kuala Lumpur, Malaysia.
-        Awarded $1,500 prize for 3rd place finish.
-      </p>
-      <div class="tags">
-        <span class="tag">IEEE ICIP 2024</span>
-        <span class="tag">Kuala Lumpur</span>
-      </div>
-    </li>
-
-  </ul>
-</section>
-
-<hr>
-
-<!-- ─── PLACES ───────────────────────────────────── -->
-<section id="places">
-  <h2>places i've been</h2>
-  <p style="font-size:13px; color:var(--muted);">
-    Pins on Google My Maps — I add places as I go.
-  </p>
-
-  <div class="map-container">
-    <iframe
-      src="https://www.google.com/maps/d/embed?mid=1y72DiEfL85oLCoN1b9j96eN_xqBfzn4"
-      width="100%"
-      height="400"
-      frameborder="0"
-      style="border:none; display:block;"
-      allowfullscreen
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-  </div>
-
-  <div class="country-chips">
-    <!-- Add or remove chips as needed -->
-    <span class="chip">🇮🇳 India</span>
-    <span class="chip">🇺🇸 United States</span>
-    <!-- example: <span class="chip">🇯🇵 Japan</span> -->
-  </div>
-</section>
-
-<hr>
-
-<!-- ─── FOOD ──────────────────────────────────────── -->
-<section id="food">
-  <h2>restaurants worth knowing about</h2>
-  <div class="legend">
-    <span class="dot"></span>
-    <span>dot means it's a favourite</span>
-  </div>
-
-  <ul class="resto-list">
-    <li class="resto-item fav">
-      <span class="resto-name"><span class="dot"></span>Apteka</span>
-      <span class="resto-meta">Pittsburgh · Eastern European vegan</span>
-    </li>
-    <li class="resto-item fav">
-      <span class="resto-name"><span class="dot"></span>Allegro</span>
-      <span class="resto-meta">Pittsburgh · Italian</span>
-    </li>
-    <li class="resto-item">
-      <span class="resto-name">Primanti Brothers</span>
-      <span class="resto-meta">Pittsburgh · Sandwiches</span>
-    </li>
-  </ul>
-</section>
-
-<hr>
-
-<!-- ─── WATCHING ──────────────────────────────────── -->
-<section id="watching">
-  <h2>movies &amp; shows i've seen</h2>
-  <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">Ones that stuck with me.</p>
-
-  <div class="movie-grid">
-    <div class="movie-card">
-      The Lord of the Rings
-      <div class="movie-meta">2001–03 · trilogy</div>
-    </div>
-    <div class="movie-card">
-      Attack on Titan
-      <div class="movie-meta">2013–23 · series</div>
-    </div>
-    <div class="movie-card">
-      Interstellar
-      <div class="movie-meta">2014 · film</div>
-    </div>
-    <div class="movie-card">
-      Inception
-      <div class="movie-meta">2010 · film</div>
-    </div>
-    <div class="movie-card">
-      Avatar
-      <div class="movie-meta">2009 · film</div>
-    </div>
-    <div class="movie-card">
-      Oppenheimer
-      <div class="movie-meta">2023 · film</div>
-    </div>
-    <div class="movie-card">
-      Arrival
-      <div class="movie-meta">2016 · film</div>
-    </div>
-  </div>
-</section>
-
-<hr>
-
-<!-- ─── HOBBIES ───────────────────────────────────── -->
-<section id="hobbies">
-  <h2>things i enjoy</h2>
-  <ul class="hobby-list">
-    <li>
-      <span class="arrow">→</span>
-      <span><strong>Finance &amp; trading</strong> — Investing, markets, and the intersection of data and
-      human behavior. I find the irrationality as interesting as the math.</span>
-    </li>
-    <li>
-      <span class="arrow">→</span>
-      <span><strong>Traveling</strong> — Exploring new places whenever I can. I try to pin everywhere I go on the map above.</span>
-    </li>
-    <li>
-      <span class="arrow">→</span>
-      <span><strong>Reading research papers</strong> — Been doing this since my second year at IIT.
-      Something genuinely satisfying about a well-designed experiment.</span>
-    </li>
-    <li>
-      <span class="arrow">→</span>
-      <span><strong>Nature</strong> — Hiking, being outdoors, generally escaping the screen when I can.</span>
-    </li>
-    <li>
-      <span class="arrow">→</span>
-      <span><strong>Writing</strong> — I post occasionally on
-      <a href="https://medium.com/@utkarsh135" target="_blank">Medium</a>,
-      trying to make research ideas more accessible.</span>
-    </li>
-  </ul>
-</section>
-
-<footer>
-  <span>Utkarsh Doshi</span>
-  <span>Last updated May 2026</span>
-</footer>
+</div><!-- /inner -->
+</div><!-- /sheet -->
 
 <script>
-  // ── Photo shuffle ──────────────────────────────────────────────
-  // Images are at the ROOT of the repo (same folder as index.html)
+  // ── Photo shuffle (images at repo root, same folder as index.html) ──
   const photos = [
     { src: "20251223_224640.jpg", caption: "" },
     { src: "IMG_2285.JPEG",       caption: "" },
-    // { src: "photo3.jpg", caption: "somewhere nice" },
   ];
-
   const pick = photos[Math.floor(Math.random() * photos.length)];
   const img  = document.getElementById("hero-photo");
   const cap  = document.getElementById("photo-caption");
-
   img.style.opacity = "0";
   img.src = pick.src;
   cap.textContent = pick.caption;
-
-  img.onload = () => { img.style.opacity = "1"; };
+  img.onload  = () => { img.style.opacity = "1"; };
   img.onerror = () => { img.closest(".photo-wrap").style.display = "none"; };
-  // ──────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>
